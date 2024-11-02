@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=4 uid="uid://donw2kcl4nfh5"]
+[gd_scene load_steps=5 format=4 uid="uid://donw2kcl4nfh5"]
 
 [ext_resource type="TileSet" uid="uid://bsf0odhw0bj4v" path="res://TileSets/tileset.tres" id="1_2p1wa"]
 [ext_resource type="PackedScene" uid="uid://cnkc27jfb3ra3" path="res://Scenes/player.tscn" id="2_n12ei"]
+[ext_resource type="PackedScene" uid="uid://cff0g4dgincf3" path="res://Scenes/pickup_item.tscn" id="3_e7mxv"]
+[ext_resource type="Resource" uid="uid://ctj3b07rp265u" path="res://Resources/gold_coin.tres" id="4_6nyj8"]
 
 [node name="main" type="Node"]
 
@@ -16,3 +18,18 @@ tile_map_data = PackedByteArray("AAAIABIAAgACAA4AAQAIABEAAgACAA0AAAAIABAAAgACAA0
 tile_set = ExtResource("1_2p1wa")
 
 [node name="Player" parent="." instance=ExtResource("2_n12ei")]
+
+[node name="PickUpItem" parent="." instance=ExtResource("3_e7mxv")]
+position = Vector2(112, 6)
+inventory_item = ExtResource("4_6nyj8")
+stacks = 12
+
+[node name="PickUpItem2" parent="." instance=ExtResource("3_e7mxv")]
+position = Vector2(86, -12)
+inventory_item = ExtResource("4_6nyj8")
+stacks = 88
+
+[node name="PickUpItem3" parent="." instance=ExtResource("3_e7mxv")]
+position = Vector2(132, -17)
+inventory_item = ExtResource("4_6nyj8")
+stacks = 20

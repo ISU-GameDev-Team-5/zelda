@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://ctj3b07rp265u"]
+
+[ext_resource type="Script" path="res://Scripts/inventory_item.gd" id="1_6fe2a"]
+[ext_resource type="Shape2D" uid="uid://bfm80e4ivoj8b" path="res://Resources/GoldCoin/gold_coin_collision_shape.tres" id="1_p7rgt"]
+[ext_resource type="Texture2D" uid="uid://cdhrhdxax31sy" path="res://Assets/Sprites/Items/Treasure/GoldCoin.png" id="3_61xo6"]
+
+[resource]
+script = ExtResource("1_6fe2a")
+slot_type = "NotEquipable"
+ground_collision_shape = ExtResource("1_p7rgt")
+name = "Gold"
+texture = ExtResource("3_61xo6")
+max_stacks = 100
+price = 1
