@@ -3,9 +3,9 @@
 [ext_resource type="TileSet" uid="uid://bsf0odhw0bj4v" path="res://TileSets/tileset.tres" id="1_2p1wa"]
 [ext_resource type="PackedScene" uid="uid://cnkc27jfb3ra3" path="res://Scenes/player.tscn" id="2_n12ei"]
 [ext_resource type="PackedScene" uid="uid://cff0g4dgincf3" path="res://Scenes/pickup_item.tscn" id="3_e7mxv"]
-[ext_resource type="Resource" uid="uid://ctj3b07rp265u" path="res://Resources/gold_coin.tres" id="4_6nyj8"]
 [ext_resource type="Resource" uid="uid://dpc6s6wbogyr0" path="res://Resources/Weapons/Shield/shield_inventory_item.tres" id="4_t2h1n"]
 [ext_resource type="Resource" uid="uid://chgjgwqutooq0" path="res://Resources/Weapons/Sword/sword_inventory_item.tres" id="5_6fl4b"]
+[ext_resource type="Resource" uid="uid://ckt8mrdlmr7d2" path="res://Resources/Weapons/SpellBook/spell_book_inventory_item.tres" id="5_elxl8"]
 
 [node name="main" type="Node"]
 
@@ -28,7 +28,7 @@ stacks = 12
 
 [node name="PickUpItem2" parent="." instance=ExtResource("3_e7mxv")]
 position = Vector2(86, -12)
-inventory_item = ExtResource("4_6nyj8")
+inventory_item = ExtResource("5_elxl8")
 stacks = 88
 
 [node name="PickUpItem3" parent="." instance=ExtResource("3_e7mxv")]

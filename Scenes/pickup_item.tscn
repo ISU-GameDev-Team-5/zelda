@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://cff0g4dgincf3"]
 
 [ext_resource type="Script" path="res://Scripts/pickup_item.gd" id="1_w4m05"]
-[ext_resource type="Texture2D" uid="uid://b60tu5mrer80f" path="res://Assets/Sprites/Items/Weapons/Shield/Shield.png" id="2_stcfx"]
-[ext_resource type="Shape2D" uid="uid://dqfawfybhirxu" path="res://Resources/Weapons/Shield/shield_ground_collision_shape.tres" id="3_p0wcp"]
+[ext_resource type="Texture2D" uid="uid://cve8764jhr218" path="res://Assets/Sprites/Items/Weapons/Book/Sprite.png" id="2_gpmn7"]
+[ext_resource type="Shape2D" uid="uid://lq7tarijbnur" path="res://Resources/Weapons/SpellBook/spell_book_ground_collision_shape.tres" id="3_wgs4g"]
 
 [node name="PickUpItem" type="Area2D"]
 collision_layer = 8
 script = ExtResource("1_w4m05")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_stcfx")
+texture = ExtResource("2_gpmn7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = ExtResource("3_p0wcp")
+shape = ExtResource("3_wgs4g")
