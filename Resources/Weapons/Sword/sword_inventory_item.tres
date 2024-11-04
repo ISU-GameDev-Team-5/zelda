@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=5 format=3 uid="uid://chgjgwqutooq0"]
+
+[ext_resource type="Shape2D" uid="uid://b1jqsgwbjf82c" path="res://Resources/Weapons/Sword/sword_ground_collision.tres" id="1_6tqxo"]
+[ext_resource type="Script" path="res://Scripts/inventory_item.gd" id="1_13vpw"]
+[ext_resource type="Texture2D" uid="uid://dgcxccu60k0ux" path="res://Assets/Sprites/Items/Weapons/Katana/Sprite.png" id="2_oivad"]
+[ext_resource type="Resource" uid="uid://bgtefphivn2ua" path="res://Resources/Weapons/Sword/sword_weapon_item.tres" id="4_g3cat"]
+
+[resource]
+script = ExtResource("1_13vpw")
+slot_type = "Right_Hand"
+ground_collision_shape = ExtResource("1_6tqxo")
+name = "Sword"
+texture = ExtResource("2_oivad")
+max_stacks = 1
+price = 90
+weapon_item = ExtResource("4_g3cat")

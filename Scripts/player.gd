@@ -10,6 +10,9 @@ const SPEED = 100.0
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector("left", "right", "up", "down")
 	
+	if animated_sprite_2d.animation.contains("attack"):
+		return
+	
 	if direction:
 		velocity = direction * SPEED
 	else:

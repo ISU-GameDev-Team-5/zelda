@@ -5,6 +5,9 @@ class_name InventorySlot
 var is_empty = true
 var is_selected = false
 
+signal equip_item
+signal drop_item
+
 @export var single_button_press = false
 @export var starting_texture: Texture
 @export var start_label: String
@@ -33,7 +36,12 @@ func _ready() -> void:
 	popup_menu.id_pressed.connect(on_popup_menu_item_pressed)
 	
 func on_popup_menu_item_pressed(id: int):
-	print_debug(id)
+	var pressed_menu_item = menu_button.get_popup().get_item_text(id)
+	if pressed_menu_item == "Drop":
+		drop_item.emit()
+		menu_button.disabled = true
+	elif pressed_menu_item.contains("Equip") && slot_to_equip != "NotEquipable":
+		equip_item.emit(slot_to_equip)
 
 func add_item(item: InventoryItem):
 	if item.slot_type != "NotEquipable":
