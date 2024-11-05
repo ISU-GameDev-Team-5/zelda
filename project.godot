@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+TransitionChangeManager="*res://Scenes/transition_manager.tscn"
+
 [input]
 
 left={
@@ -61,6 +65,7 @@ right_hand_action={
 2d_physics/layer_4="PickUpItem"
 2d_physics/layer_5="Weapon"
 2d_physics/layer_6="Enemy"
+2d_physics/layer_7="Entrance"
 
 [rendering]
 
