@@ -5,7 +5,19 @@ class_name Player
 @onready var animated_sprite_2d: AnimationController = $AnimatedSprite2D
 @onready var inventory: Inventory = $Inventory
 
+@onready var health_system: HealthSystem = $HealthSystem
+@onready var on_screen_ui: OnScreenUI = $OnScreenUI
+@onready var combat_system: CombatSystem = $CombatSystem
+
+@export var health = 100
+
 const SPEED = 100.0
+
+func _ready() -> void:
+	health_system.init(health)
+	health_system.died.connect(on_player_dead)
+	health_system.damage_taken.connect(on_damage_taken)
+	on_screen_ui.init_health_bar(health)
 
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector("left", "right", "up", "down")
@@ -31,3 +43,15 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is PickUpItem:
 		inventory.add_item(area.inventory_item, area.stacks)
 		area.queue_free()
+	
+	if area.get_parent() is Enemy:
+		var damage_to_player = (area.get_parent() as Enemy).damage_to_player
+		health_system.apply_damage(damage_to_player)
+
+func on_damage_taken(damage: int) -> void:
+	on_screen_ui.apply_damage_to_health_bar(damage)
+	
+func on_player_dead():
+	set_physics_process(false)
+	combat_system.set_process_input(false)
+	animated_sprite_2d.play("dead")

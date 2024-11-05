@@ -18,3 +18,9 @@ func init(config: SpellConfig):
 	
 func _process(delta: float) -> void:
 	position += speed * delta * direction
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Enemy:
+		(area.get_parent() as Enemy).apply_damage(damage)
+		queue_free()

@@ -45,7 +45,7 @@ func perform_action(weapon: WeaponItem, sprite: Sprite2D):
 	sprite.show()
 	
 	if weapon.attack_type == "Magic":
-		cast_active_spell.emit()
+		pass
 
 func set_active_weapon(weapon: WeaponItem, slot_to_equip: String):
 	if slot_to_equip == "Left_Hand":
@@ -63,3 +63,8 @@ func on_attack_animation_finished():
 	can_attack = true
 	right_hand_weapon_sprite.hide()
 	left_hand_weapon_sprite.hide()
+
+
+func _on_area_2d_body_entered(body: Node2D, hand_type) -> void:
+	if body.has_node("HealthSystem") and hand_type == "right":
+		(body.find_child("HealthSystem") as HealthSystem).apply_damage(right_weapon.damage)

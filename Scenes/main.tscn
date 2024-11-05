@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://donw2kcl4nfh5"]
+[gd_scene load_steps=9 format=4 uid="uid://donw2kcl4nfh5"]
 
 [ext_resource type="TileSet" uid="uid://bsf0odhw0bj4v" path="res://TileSets/tileset.tres" id="1_2p1wa"]
 [ext_resource type="PackedScene" uid="uid://cnkc27jfb3ra3" path="res://Scenes/player.tscn" id="2_n12ei"]
@@ -6,6 +6,8 @@
 [ext_resource type="Resource" uid="uid://dpc6s6wbogyr0" path="res://Resources/Weapons/Shield/shield_inventory_item.tres" id="4_t2h1n"]
 [ext_resource type="Resource" uid="uid://chgjgwqutooq0" path="res://Resources/Weapons/Sword/sword_inventory_item.tres" id="5_6fl4b"]
 [ext_resource type="Resource" uid="uid://ckt8mrdlmr7d2" path="res://Resources/Weapons/SpellBook/spell_book_inventory_item.tres" id="5_elxl8"]
+[ext_resource type="PackedScene" uid="uid://ch36e5oo15rwo" path="res://Scenes/enemy.tscn" id="7_eqcmt"]
+[ext_resource type="Resource" uid="uid://ctj3b07rp265u" path="res://Resources/gold_coin.tres" id="8_2wptd"]
 
 [node name="main" type="Node"]
 
@@ -20,6 +22,7 @@ tile_map_data = PackedByteArray("AAAIABIAAgACAA4AAQAIABEAAgACAA0AAAAIABAAAgACAA0
 tile_set = ExtResource("1_2p1wa")
 
 [node name="Player" parent="." instance=ExtResource("2_n12ei")]
+position = Vector2(-3, -23)
 
 [node name="PickUpItem" parent="." instance=ExtResource("3_e7mxv")]
 position = Vector2(112, 6)
@@ -35,3 +38,24 @@ stacks = 88
 position = Vector2(132, -17)
 inventory_item = ExtResource("5_6fl4b")
 stacks = 20
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("patrol_path") instance=ExtResource("7_eqcmt")]
+position = Vector2(89, 370)
+speed = 50.0
+patrol_path = [NodePath("../EnemyPatrolPath/Marker2D"), NodePath("../EnemyPatrolPath/Marker2D2"), NodePath("../EnemyPatrolPath/Marker2D3"), NodePath("../EnemyPatrolPath/Marker2D4")]
+item_to_drop = ExtResource("8_2wptd")
+loot_stacks = 15
+
+[node name="EnemyPatrolPath" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="EnemyPatrolPath"]
+position = Vector2(89, 373)
+
+[node name="Marker2D2" type="Marker2D" parent="EnemyPatrolPath"]
+position = Vector2(197, 428)
+
+[node name="Marker2D3" type="Marker2D" parent="EnemyPatrolPath"]
+position = Vector2(40, 435)
+
+[node name="Marker2D4" type="Marker2D" parent="EnemyPatrolPath"]
+position = Vector2(194, 365)

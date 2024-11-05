@@ -137,6 +137,8 @@ animations = [{
 }]
 
 [node name="Spell" type="Area2D"]
+collision_layer = 16
+collision_mask = 32
 script = ExtResource("1_bj0n8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -146,3 +148,5 @@ animation = &"fireball"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 1)
 shape = ExtResource("4_d7vsw")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

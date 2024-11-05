@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cnkc27jfb3ra3"]
+[gd_scene load_steps=37 format=3 uid="uid://cnkc27jfb3ra3"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6fkcb"]
 [ext_resource type="Texture2D" uid="uid://bodxabpohy77n" path="res://Assets/Sprites/Actor/Characters/DarkNinja/SpriteSheet.png" id="1_bv8g3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/inventory.gd" id="6_ci5n0"]
 [ext_resource type="Script" path="res://Scripts/combat_system.gd" id="8_l7mtp"]
 [ext_resource type="Script" path="res://Scripts/spell_system.gd" id="9_ytkwu"]
+[ext_resource type="PackedScene" uid="uid://b6lm2mg2kfo5k" path="res://Scenes/health_system.tscn" id="10_d4qt5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uhnko"]
 atlas = ExtResource("1_bv8g3")
@@ -33,6 +34,10 @@ region = Rect2(16, 32, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkccd"]
 atlas = ExtResource("1_bv8g3")
 region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glgda"]
+atlas = ExtResource("1_bv8g3")
+region = Rect2(0, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5a54"]
 atlas = ExtResource("1_bv8g3")
@@ -143,6 +148,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_glgda")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_g5a54")
 }],
 "loop": false,
@@ -247,7 +260,7 @@ script = ExtResource("1_6fkcb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_twmxr")
-animation = &"right_attack"
+animation = &"dead"
 autoplay = "front_idle"
 script = ExtResource("2_ejpem")
 
@@ -258,7 +271,7 @@ shape = ExtResource("4_oapsw")
 zoom = Vector2(3, 3)
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_mask = 8
+collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("4_oapsw")
@@ -293,5 +306,9 @@ collision_mask = 32
 [node name="SpellSystem" type="Node" parent="."]
 script = ExtResource("9_ytkwu")
 
+[node name="HealthSystem" parent="." instance=ExtResource("10_d4qt5")]
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="CombatSystem/RightHandWeaponSprite/Area2D" to="CombatSystem" method="_on_area_2d_body_entered" binds= ["right"]]
+[connection signal="body_entered" from="CombatSystem/LeftHandWeaponSprite/Area2D" to="CombatSystem" method="_on_area_2d_body_entered" binds= ["left"]]
