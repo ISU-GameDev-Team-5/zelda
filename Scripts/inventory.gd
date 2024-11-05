@@ -2,6 +2,8 @@ extends Node
 
 class_name Inventory
 
+signal spell_activated(spell_index: int)
+
 @onready var on_screen_ui: OnScreenUI = $"../OnScreenUI"
 @onready var inventory_ui: InventoryUI = $"../InventoryUI"
 @onready var combat_system: CombatSystem = $"../CombatSystem"
@@ -11,10 +13,12 @@ const PICKUP_ITEM = preload("res://Scenes/pickup_item.tscn")
 @export var items: Array[InventoryItem] = []
 
 var taken_inventory_slots_count = 0
+var selected_spell_index = -1
 
 func _ready() -> void:
 	inventory_ui.equip_item.connect(on_item_equipped)
 	inventory_ui.drop_item_on_the_ground.connect(on_item_dropped)
+	inventory_ui.spell_slot_clicked.connect(spell_slot_clicked)
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("toggle_inventory"):
@@ -65,10 +69,13 @@ func on_item_equipped(idx: int, slot_to_equip: String):
 	var item_to_equip = items[idx]
 	on_screen_ui.equip_item(item_to_equip, slot_to_equip)
 	combat_system.set_active_weapon(item_to_equip.weapon_item, slot_to_equip)
+	check_magic_ui_visibility()
 	
 func on_item_dropped(idx: int):
 	clear_inventory_slot(idx)
 	eject_item_into_the_ground(idx)
+	
+	check_magic_ui_visibility()
 	
 func clear_inventory_slot(idx: int):
 	taken_inventory_slots_count -= 1
@@ -108,3 +115,17 @@ func eject_item_into_the_ground(idx: int):
 		on_screen_ui.left_hand_slot.set_equipment_texture(null)
 	
 	items[idx] = null
+
+func spell_slot_clicked(idx: int):
+	selected_spell_index = idx
+	inventory_ui.set_selected_spell_slot(selected_spell_index)
+	spell_activated.emit(selected_spell_index)
+	
+func check_magic_ui_visibility():
+	var should_show_magic_ui = (combat_system.left_weapon != null and \
+		 combat_system.left_weapon.attack_type == "Magic") or \
+		(combat_system.right_weapon != null and \
+		combat_system.right_weapon.attack_type == "Magic")
+	inventory_ui.toggle_spells_ui(should_show_magic_ui)
+	if should_show_magic_ui == false:
+		on_screen_ui.toggle_spell_slot(false, null)

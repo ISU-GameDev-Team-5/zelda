@@ -14,7 +14,7 @@ func init(config: SpellConfig):
 	damage = config.damage
 	name = config.spell_name
 	speed = config.speed
-	animated_sprite_2d.play(config.spell_name)
+	animated_sprite_2d.play(config.spell_name.to_lower())
 	
 func _process(delta: float) -> void:
 	position += speed * delta * direction

@@ -42,6 +42,14 @@ layout_mode = 2
 expand_mode = 2
 stretch_mode = 5
 
+[node name="ColorRect" type="ColorRect" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 10.0
+offset_right = 51.0
+offset_bottom = 10.0
+color = Color(0.992157, 0.478431, 1, 0.337255)
+
 [node name="SlotLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2

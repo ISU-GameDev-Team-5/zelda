@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cnkc27jfb3ra3"]
+[gd_scene load_steps=35 format=3 uid="uid://cnkc27jfb3ra3"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6fkcb"]
 [ext_resource type="Texture2D" uid="uid://bodxabpohy77n" path="res://Assets/Sprites/Actor/Characters/DarkNinja/SpriteSheet.png" id="1_bv8g3"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://qf7426rko4j2" path="res://Scenes/UI/on_screen_ui.tscn" id="5_yh248"]
 [ext_resource type="Script" path="res://Scripts/inventory.gd" id="6_ci5n0"]
 [ext_resource type="Script" path="res://Scripts/combat_system.gd" id="8_l7mtp"]
+[ext_resource type="Script" path="res://Scripts/spell_system.gd" id="9_ytkwu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uhnko"]
 atlas = ExtResource("1_bv8g3")
@@ -288,6 +289,9 @@ collision_layer = 16
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CombatSystem/LeftHandWeaponSprite/Area2D"]
+
+[node name="SpellSystem" type="Node" parent="."]
+script = ExtResource("9_ytkwu")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
