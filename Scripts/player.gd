@@ -55,3 +55,10 @@ func on_player_dead():
 	set_physics_process(false)
 	combat_system.set_process_input(false)
 	animated_sprite_2d.play("dead")
+	
+func setup_test_inventory():
+	const SWORD_INVENTORY_ITEM = preload("res://Resources/Weapons/Sword/sword_inventory_item.tres")
+	const GOLD_COIN = preload("res://Resources/gold_coin.tres")
+	
+	inventory.add_item(SWORD_INVENTORY_ITEM, 1)
+	inventory.add_item(GOLD_COIN, 100)

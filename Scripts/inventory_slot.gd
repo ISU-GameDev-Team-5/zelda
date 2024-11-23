@@ -65,3 +65,7 @@ func _on_on_click_button_pressed() -> void:
 	
 func toggle_button_selected_variation(is_selected: bool):
 	on_click_button.theme_type_variation = "selected" if is_selected else ""
+
+func show_price_tag(price: int):
+	price_label.text = str(price) + " gold"
+	price_label.show()

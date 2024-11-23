@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=4 uid="uid://donw2kcl4nfh5"]
+[gd_scene load_steps=12 format=4 uid="uid://donw2kcl4nfh5"]
 
+[ext_resource type="Script" path="res://Scenes/main.gd" id="1_0ea3o"]
 [ext_resource type="TileSet" uid="uid://bsf0odhw0bj4v" path="res://TileSets/tileset.tres" id="1_2p1wa"]
 [ext_resource type="PackedScene" uid="uid://cnkc27jfb3ra3" path="res://Scenes/player.tscn" id="2_n12ei"]
 [ext_resource type="PackedScene" uid="uid://cff0g4dgincf3" path="res://Scenes/pickup_item.tscn" id="3_e7mxv"]
@@ -13,6 +14,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssqni"]
 
 [node name="main" type="Node"]
+script = ExtResource("1_0ea3o")
 
 [node name="TileLayers" type="Node" parent="."]
 
@@ -74,5 +76,8 @@ script = ExtResource("9_3e83c")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-8, -59)
 shape = SubResource("RectangleShape2D_ssqni")
+
+[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(-8, -39)
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

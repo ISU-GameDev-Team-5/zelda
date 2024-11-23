@@ -12,5 +12,5 @@ ground_collision_shape = ExtResource("1_ytyx1")
 name = "Shield"
 texture = ExtResource("3_viinn")
 max_stacks = 0
-price = 0
+price = 65
 weapon_item = ExtResource("4_fjnin")
