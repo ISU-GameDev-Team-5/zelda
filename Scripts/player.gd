@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 class_name Player
+@onready var player: Player = $"."
 
 @onready var animated_sprite_2d: AnimationController = $AnimatedSprite2D
 @onready var inventory: Inventory = $Inventory
@@ -45,8 +46,12 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		area.queue_free()
 	
 	if area.get_parent() is Enemy:
-		var damage_to_player = (area.get_parent() as Enemy).damage_to_player
-		health_system.apply_damage(damage_to_player)
+		if area.name == (area.get_parent() as Enemy).attack_area_2d.name:
+			var damage_to_player = (area.get_parent() as Enemy).damage_to_player
+			health_system.apply_damage(damage_to_player)
+		elif area.name == (area.get_parent() as Enemy).trigger_area_2d.name:
+			(area.get_parent() as Enemy).is_aggred = true
+			(area.get_parent() as Enemy).chase_player(player)
 
 func on_damage_taken(damage: int) -> void:
 	on_screen_ui.apply_damage_to_health_bar(damage)

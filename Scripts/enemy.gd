@@ -10,18 +10,23 @@ class_name Enemy
 
 @export var health: int = 50
 @export var item_to_drop: InventoryItem
+@export var deaggro_range: float = 200.0 
 
+@onready var trigger_area_2d: Area2D = $TriggerArea2D
 @onready var animated_sprite_2d: EnemyAnimatedSprite2D = $AnimatedSprite2D
 @onready var health_system: HealthSystem = $HealthSystem
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var area_collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
+@onready var area_collision_shape_2d: CollisionShape2D = $AttackArea2D/CollisionShape2D
+@onready var attack_area_2d: Area2D = $AttackArea2D
 @export var loot_stacks = 1
 
 const PICKUP_ITEM = preload("res://Scenes/pickup_item.tscn")
 
 var current_patrol_target = 0
 var wait_timer = 0.0
+var is_aggred = false
+var player: Player = null
 
 func _ready() -> void:
 	health_system.init(health)
@@ -33,12 +38,28 @@ func _ready() -> void:
 	health_system.died.connect(on_died)
 	
 func _physics_process(delta: float) -> void:
-	if patrol_path.size() > 1:
+	if patrol_path.size() > 1 && not is_aggred:
 		move_along_path(delta)
+	elif is_aggred:
+		chase_player(player)
+		check_aggro(player)
 	
 func apply_damage(damage: int):
 	health_system.apply_damage(damage)
-	
+
+func check_aggro(player: Player):
+	var distance_to_player = global_position.distance_to(player.global_position)
+	if is_aggred:
+		if distance_to_player > deaggro_range:
+			is_aggred = false  # Снятие агро
+
+func chase_player(player: Player):
+	self.player = player
+	var direction = (player.global_position - global_position).normalized()
+	velocity = direction * speed
+	animated_sprite_2d.play_movement_animation(direction)
+	move_and_slide()
+
 func move_along_path(delta: float):
 	var target_position = patrol_path[current_patrol_target].global_position
 	var direction = (target_position - position).normalized()

@@ -52,6 +52,9 @@ stacks = 20
 position = Vector2(89, 370)
 speed = 50.0
 patrol_path = [NodePath("../EnemyPatrolPath/Marker2D"), NodePath("../EnemyPatrolPath/Marker2D2"), NodePath("../EnemyPatrolPath/Marker2D3"), NodePath("../EnemyPatrolPath/Marker2D4")]
+patrol_wait_time = 1.0
+damage_to_player = 10
+health = 50
 item_to_drop = ExtResource("8_2wptd")
 loot_stacks = 15
 
