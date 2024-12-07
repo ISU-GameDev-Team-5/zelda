@@ -45,7 +45,7 @@ func perform_action(weapon: WeaponItem, sprite: Sprite2D, collision_shape: Colli
 	sprite.show()
 	collision_shape.disabled = false
 	if weapon.attack_type == "Magic":
-		pass
+		cast_active_spell.emit()
 
 func set_active_weapon(weapon: WeaponItem, slot_to_equip: String):
 	if slot_to_equip == "Left_Hand":

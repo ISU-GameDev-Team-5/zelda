@@ -32,10 +32,10 @@ var attack_vector:
 		return DIRECTION_TO_ATTACK_VECTOR[attack_direction]
 
 func play_movement_animation(velocity: Vector2):
-	if velocity.x > 0:
+	if velocity.x > 0 and velocity.y == 0:
 		item_eject_direction = Vector2.RIGHT
 		play("right_walk")
-	elif velocity.x < 0:
+	elif velocity.x < 0 and velocity.y == 0:
 		item_eject_direction = Vector2.LEFT
 		play("left_walk")
 	
