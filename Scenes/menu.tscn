@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgx5ob3v721wg"]
+
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_l5ojd"]
+[ext_resource type="Texture2D" uid="uid://nlbdie85c6wh" path="res://Assets/menu.jpg" id="2_o3ah8"]
+[ext_resource type="Theme" uid="uid://cesagjv6y447q" path="res://Resources/UI/themes.tres" id="2_vs27p"]
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_l5ojd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -221.0
+offset_top = -282.0
+offset_right = 1379.0
+offset_bottom = 918.0
+texture = ExtResource("2_o3ah8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -36.0
+offset_right = 25.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_vs27p")
+theme_override_font_sizes/font_size = 24
+text = "Play"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_vs27p")
+theme_override_font_sizes/font_size = 24
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
