@@ -65,6 +65,44 @@ func add_stackable_item_to_inventory(item: InventoryItem, stacks: int):
 		inventory_ui.add_item(item)
 		taken_inventory_slots_count += 1
 		
+
+func __check_item(item: InventoryItem, quantity: int) -> bool:
+	if item.type == "Gold":  # Assuming item type is a string that could be "Gold" or the name of another item
+		var current_gold = find_child("GoldCoin").stacks
+		return current_gold >= quantity  # Check if enough gold is available
+	else:
+		var player_inventory = find_child("Inventory") as Inventory
+		var inventory_slots = player_inventory.items
+		for slot in inventory_slots:
+			if slot.item == item:
+				return slot.stacks >= quantity  # Check if enough items are available
+	return false  # Item not found in inventory
+		
+func remove_item(item: InventoryItem, count: int):
+	var quantity = _count_item(item)
+	if quantity < count:
+		return false
+	var idx = items.find(item)
+	if idx != -1:
+		var diff = items[idx].stacks - count
+		if diff > 0:
+			items[idx].stacks = diff # Если что-то еще осталось
+		elif diff == 0:
+			clear_inventory_slot(idx) # удаляем
+		else:
+			var updated_count = diff * -1 # ищем следующий стак
+			remove_item(item, updated_count)
+		return true
+	return false
+
+
+func _count_item(item: InventoryItem) -> int:
+	var result = 0
+	for i in range(items.size()):
+		if items[i] == item:
+			result +=  items[i].stacks
+	return result
+		
 func on_item_equipped(idx: int, slot_to_equip: String):
 	var item_to_equip = items[idx]
 	on_screen_ui.equip_item(item_to_equip, slot_to_equip)

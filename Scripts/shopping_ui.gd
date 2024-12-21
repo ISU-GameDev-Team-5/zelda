@@ -65,18 +65,17 @@ func _on_buy_button_pressed() -> void:
 	for i in selected_buy_item_indexes:
 		var item_to_buy = items_to_buy[i]
 		var player = get_tree().get_first_node_in_group("player") as Player
-		(player.find_child("Inventory") as Inventory).add_item(item_to_buy, item_to_buy.stacks)
-		var gold_to_add_to_merchant_inventory = item_to_buy.price * item_to_buy.stacks
-		GOLD_COIN.stacks = gold_to_add_to_merchant_inventory
-		var merchant = get_tree().get_first_node_in_group("merchant") as Merchant
-		merchant.items_to_buy.erase(item_to_buy)
-		merchant.items_to_buy.append(GOLD_COIN)
-		buying_grid_container.get_child(i).queue_free()
-		selected_buy_item_indexes.erase(i)
-		
+		var inventory = (player.find_child("Inventory") as Inventory)
 		var gold_to_sub_to_player = item_to_buy.price * item_to_buy.stacks
-		#inventory.add_item(GOLD_COIN, gold_to_sub_to_player)
-	
+		if inventory.remove_item(GOLD_COIN, gold_to_sub_to_player):
+			inventory.add_item(item_to_buy, item_to_buy.stacks)
+			var gold_to_add_to_merchant_inventory = item_to_buy.price * item_to_buy.stacks
+			GOLD_COIN.stacks = gold_to_add_to_merchant_inventory
+			var merchant = get_tree().get_first_node_in_group("merchant") as Merchant
+			merchant.items_to_buy.erase(item_to_buy)
+			merchant.items_to_buy.append(GOLD_COIN)
+			buying_grid_container.get_child(i).queue_free()
+			selected_buy_item_indexes.erase(i)
 	setup_buying_grid()
 	setup_selling_grid()
 	buy_button.disabled = true

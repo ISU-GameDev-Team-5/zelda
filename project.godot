@@ -72,6 +72,7 @@ merchant={
 2d_physics/layer_6="Enemy"
 2d_physics/layer_7="Entrance"
 2d_physics/layer_8="Merchant"
+2d_physics/layer_9="Chest"
 
 [rendering]
 

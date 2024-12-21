@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://donw2kcl4nfh5"]
+[gd_scene load_steps=13 format=4 uid="uid://donw2kcl4nfh5"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_0ea3o"]
 [ext_resource type="TileSet" uid="uid://bsf0odhw0bj4v" path="res://TileSets/tileset.tres" id="1_2p1wa"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ch36e5oo15rwo" path="res://Scenes/enemy.tscn" id="7_eqcmt"]
 [ext_resource type="Resource" uid="uid://ctj3b07rp265u" path="res://Resources/gold_coin.tres" id="8_2wptd"]
 [ext_resource type="Script" path="res://Scripts/shop_entrance.gd" id="9_3e83c"]
+[ext_resource type="PackedScene" uid="uid://c773quia3nrqo" path="res://Scenes/chest.tscn" id="11_vk3d8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssqni"]
 
@@ -79,5 +80,9 @@ shape = SubResource("RectangleShape2D_ssqni")
 
 [node name="PlayerSpawnPoint" type="Marker2D" parent="."]
 position = Vector2(-8, -39)
+
+[node name="Chest" parent="." instance=ExtResource("11_vk3d8")]
+position = Vector2(-254, -77)
+item_to_drop = ExtResource("8_2wptd")
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
