@@ -83,7 +83,6 @@ func on_died():
 	area_collision_shape_2d.set_deferred("disabled", true)
 	animated_sprite_2d.play("died")
 
-
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation == "died":
 		var loot_drop = PICKUP_ITEM.instantiate() as PickUpItem

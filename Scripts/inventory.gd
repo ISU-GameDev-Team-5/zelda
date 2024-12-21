@@ -87,10 +87,12 @@ func remove_item(item: InventoryItem, count: int):
 		var diff = items[idx].stacks - count
 		if diff > 0:
 			items[idx].stacks = diff # Если что-то еще осталось
+			inventory_ui.update_stack_at_slot_index(diff, idx)
 		elif diff == 0:
 			clear_inventory_slot(idx) # удаляем
 		else:
 			var updated_count = diff * -1 # ищем следующий стак
+			clear_inventory_slot(idx)
 			remove_item(item, updated_count)
 		return true
 	return false

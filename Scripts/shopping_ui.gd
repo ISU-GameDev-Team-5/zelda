@@ -10,6 +10,7 @@ var selected_buy_item_indexes: Array[int] = []
 
 const INVENTORY_SLOT = preload("res://Scenes/UI/inventory_slot.tscn")
 var GOLD_COIN = preload("res://Resources/gold_coin.tres")
+var MERCHANT_GOLD_COIN = preload("res://Resources/gold_coin.tres")
 @onready var buying_grid_container: GridContainer = %BuyingGridContainer
 @onready var selling_grid_container: GridContainer = %SellingGridContainer
 
@@ -44,7 +45,7 @@ func setup_selling_grid():
 		
 	for i in items_to_sell.size():
 		var selling_slot = INVENTORY_SLOT.instantiate() as InventorySlot
-		selling_slot.single_button_press = true
+		selling_slot.single_button_press = true	
 		selling_grid_container.add_child(selling_slot)
 		selling_slot.add_item(items_to_sell[i])
 		selling_slot.show_price_tag(items_to_sell[i].price * items_to_sell[i].stacks)
@@ -70,10 +71,10 @@ func _on_buy_button_pressed() -> void:
 		if inventory.remove_item(GOLD_COIN, gold_to_sub_to_player):
 			inventory.add_item(item_to_buy, item_to_buy.stacks)
 			var gold_to_add_to_merchant_inventory = item_to_buy.price * item_to_buy.stacks
-			GOLD_COIN.stacks = gold_to_add_to_merchant_inventory
+			#GOLD_COIN.stacks = gold_to_add_to_merchant_inventory
 			var merchant = get_tree().get_first_node_in_group("merchant") as Merchant
 			merchant.items_to_buy.erase(item_to_buy)
-			merchant.items_to_buy.append(GOLD_COIN)
+			#merchant.items_to_buy.append(GOLD_COIN)
 			buying_grid_container.get_child(i).queue_free()
 			selected_buy_item_indexes.erase(i)
 	setup_buying_grid()

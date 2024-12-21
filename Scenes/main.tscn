@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://donw2kcl4nfh5"]
+[gd_scene load_steps=15 format=4 uid="uid://donw2kcl4nfh5"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_0ea3o"]
 [ext_resource type="TileSet" uid="uid://bsf0odhw0bj4v" path="res://TileSets/tileset.tres" id="1_2p1wa"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/shop_entrance.gd" id="9_3e83c"]
 [ext_resource type="PackedScene" uid="uid://c773quia3nrqo" path="res://Scenes/chest.tscn" id="11_vk3d8"]
 [ext_resource type="PackedScene" uid="uid://ds3dfffjppohn" path="res://Scenes/destructible_box.tscn" id="12_e0a2h"]
+[ext_resource type="PackedScene" uid="uid://bewmtncfexvcf" path="res://Scenes/enemy_2.tscn" id="13_n3cu0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssqni"]
 
@@ -103,5 +104,29 @@ position = Vector2(88, -394)
 
 [node name="DestructibleBox6" parent="." instance=ExtResource("12_e0a2h")]
 position = Vector2(46, -424)
+
+[node name="Enemy2PatrolPath" type="Node2D" parent="."]
+position = Vector2(114, -462)
+
+[node name="Marker2D3" type="Marker2D" parent="Enemy2PatrolPath"]
+position = Vector2(-138, 22)
+
+[node name="Marker2D" type="Marker2D" parent="Enemy2PatrolPath"]
+position = Vector2(-130, -12)
+
+[node name="Marker2D2" type="Marker2D" parent="Enemy2PatrolPath"]
+position = Vector2(37, 29)
+
+[node name="Marker2D4" type="Marker2D" parent="Enemy2PatrolPath"]
+position = Vector2(42, -3)
+
+[node name="Enemy2" parent="." node_paths=PackedStringArray("patrol_path") instance=ExtResource("13_n3cu0")]
+position = Vector2(96, -449)
+collision_layer = 32
+collision_mask = 20
+speed = 70.0
+patrol_path = [NodePath("../Enemy2PatrolPath/Marker2D"), NodePath("../Enemy2PatrolPath/Marker2D2"), NodePath("../Enemy2PatrolPath/Marker2D3"), NodePath("../Enemy2PatrolPath/Marker2D4")]
+health = 10
+item_to_drop = ExtResource("8_2wptd")
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
